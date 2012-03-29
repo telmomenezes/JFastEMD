@@ -24,20 +24,16 @@ public class Test {
         }
         
 
-        Feature[] features = new Feature[n];
+        Feature2D[] features = new Feature2D[n];
         double[] weights = new double[n];
-
-        for (int i = 0; i < n; i++) {
-            features[i] = new Feature();
-        }
         
         int i = 0;
         for (int x = 0; x < bin_number; x++) {
             for (int y = 0; y < bin_number; y++) {
                 double val = getValue(map, x, y);
                 if (val > 0) {
-                    features[i].x = x;
-                    features[i].y = y;
+                    Feature2D f = new Feature2D(x, y);
+                    features[i] = f;
                     weights[i] = val;
                     i++;
                 }
@@ -45,9 +41,9 @@ public class Test {
         }
 
         Signature signature = new Signature();
-        signature.n = n;
-        signature.Features = features;
-        signature.Weights = weights;
+        signature.setNumberOfFeatures(n);
+        signature.setFeatures(features);
+        signature.setWeights(weights);
 
         return signature;
     }
