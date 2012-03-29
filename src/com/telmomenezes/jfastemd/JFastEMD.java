@@ -1,3 +1,16 @@
+/**
+ * This class computes the Earth Mover's Distance, using the EMD-HAT algorithm
+ * created by Ofir Pele and Michael Werman.
+ * 
+ * This implementation is strongly based on the C++ code by the same authors,
+ * that can be found here:
+ * http://www.cs.huji.ac.il/~ofirpele/FastEMD/code/
+ * 
+ * Some of the author's comments on the original were kept or edited for 
+ * this context.
+ */
+
+
 package com.telmomenezes.jfastemd;
 
 import java.util.HashSet;
@@ -385,50 +398,6 @@ public class JFastEMD {
         }
     }
 
-    // =============================================================================
-    // This interface is similar to Rubner's interface. See:
-    // http://www.cs.duke.edu/~tomasi/software/emd.htm
-    // With the following changes;
-    // 1. Weights of signature should be of type double (see emd_hat.hpp)
-    // 2. Return value of the distance function (func) should be of type double
-    // 3. Return value of the emd_hat_signature_interface function is double
-    // 4. The function does not return a flow (I may add this in future, if
-    // needed)
-    // 5. The function also gets the penalty for extra mass - if you want metric
-    // property
-    // should be at least half the diameter of the space (maximum possible
-    // distance
-    // between any two points). In Rubner's code this is implicitly 0.
-    // 6. The result is not normalized with the flow.
-    //
-    // To get the same results as Rubner's code you should set
-    // extra_mass_penalty to 0,
-    // and divide by the minimum of the sum of the two signature's weights.
-    // However, I
-    // suggest not to do this as you lose the metric property and more
-    // importantly, in my
-    // experience the performance is better with emd_hat. for more on the
-    // difference
-    // between emd and emd_hat, see the paper:
-    // A Linear Time Histogram Metric for Improved SIFT Matching
-    // Ofir Pele, Michael Werman
-    // ECCV 2008
-    //
-    // To get shorter running time, set the ground distance function (func) to
-    // be a thresholded distance. For example: min( L2, T ). Where T is some
-    // threshold.
-    // Note that the running time is shorter with smaller T values. Note also
-    // that
-    // thresholding the distance will probably increase accuracy. Finally, a
-    // thresholded
-    // metric is also a metric. See paper:
-    // Fast and Robust Earth Mover's Distances
-    // Ofir Pele, Michael Werman
-    // ICCV 2009
-    //
-    // If you use this code, please cite the papers.
-    // =============================================================================
-
     long emdHatImplLongLongInt(Vector<Long> Pc, Vector<Long> Qc,
             Vector<Vector<Long>> C, long extra_mass_penalty) {
 
@@ -705,15 +674,32 @@ public class JFastEMD {
         return dist;
     }
 
-    // / Similar to Rubner's emd interface.
-    // / extra_mass_penalty - it's alpha*maxD_ij in my ECCV paper. If you want
-    // metric property
-    // / should be at least half the diameter of the space (maximum possible
-    // distance
-    // / between any two points). In Rubner's code this is implicitly 0.
-    // / Default value is -1 which means
-    // 1*max_distance_between_bins_of_signatures
-    double distance(Signature signature1, Signature signature2, double extraMassPenalty) {
+    
+    /**
+     * This interface is similar to Rubner's interface. See:
+     * http://www.cs.duke.edu/~tomasi/software/emd.htm
+     *
+     * To get the same results as Rubner's code you should set extra_mass_penalty to 0,
+     * and divide by the minimum of the sum of the two signature's weights. However, I
+     * suggest not to do this as you lose the metric property and more importantly, in my
+     * experience the performance is better with emd_hat. for more on the difference
+     * between emd and emd_hat, see the paper:
+     * A Linear Time Histogram Metric for Improved SIFT Matching
+     * Ofir Pele, Michael Werman
+     * ECCV 2008
+     *
+     * To get shorter running time, set the ground distance function to
+     * be a thresholded distance. For example: min(L2, T). Where T is some threshold.
+     * Note that the running time is shorter with smaller T values. Note also that
+     * thresholding the distance will probably increase accuracy. Finally, a thresholded
+     * metric is also a metric. See paper:
+     * Fast and Robust Earth Mover's Distances
+     * Ofir Pele, Michael Werman
+     * ICCV 2009
+     *
+     * If you use this code, please cite the papers.
+     */
+    public double distance(Signature signature1, Signature signature2, double extraMassPenalty) {
 
         Vector<Double> P = new Vector<Double>();
         Vector<Double> Q = new Vector<Double>();
