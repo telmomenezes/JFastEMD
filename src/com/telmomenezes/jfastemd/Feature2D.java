@@ -1,8 +1,8 @@
 package com.telmomenezes.jfastemd;
 
 public class Feature2D implements Feature {
-    double x;
-    double y;
+    private double x;
+    private double y;
 
     public Feature2D(double x, double y) {
         this.x = x;
