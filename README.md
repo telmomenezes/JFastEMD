@@ -85,3 +85,9 @@ The two-dimensional matrices can be converted to signature like so:
 
         return signature;
     }
+
+
+License
+-------
+
+This code is released under the BSD license.
