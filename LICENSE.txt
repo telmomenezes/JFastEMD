@@ -1,15 +1,12 @@
 IMPORTANT: READ BEFORE DOWNLOADING, COPYING, INSTALLING OR USING.
 
-This license is for all code in this distribution except: demo_FastEMD4/deltaE2000.hpp which is a
-C++ version of Garuv Sharma's Matlab code which can be found here:
-http://www.ece.rochester.edu/~gsharma/ciede2000/dataNprograms/deltaE2000.m
 
 By downloading, copying, installing or using the software you agree to this license.  If you do not
 agree to this license, do not download, install, copy or use the software.
 
 LICENSE CONDITIONS
 
-Copyright (c) 2009-2011, Ofir Pele
+Copyright (c) 2009-2012, Telmo Menezes and Ofir Pele
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without modification, are permitted
