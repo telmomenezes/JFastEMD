@@ -14,6 +14,7 @@ public class Test {
 
     static Signature getSignature(double[] map, int bins)
     {
+        // find number of entries in the sparse matrix
         int n = 0;
         for (int x = 0; x < bins; x++) {
             for (int y = 0; y < bins; y++) {
@@ -24,9 +25,9 @@ public class Test {
         }
         
 
+        // compute features and weights
         Feature2D[] features = new Feature2D[n];
         double[] weights = new double[n];
-        
         int i = 0;
         for (int x = 0; x < bins; x++) {
             for (int y = 0; y < bins; y++) {
