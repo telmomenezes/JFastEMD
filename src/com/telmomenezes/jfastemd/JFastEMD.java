@@ -20,7 +20,11 @@ import java.util.List;
 import java.util.Set;
 import java.util.Vector;
 
-
+/**
+ * @author Telmo Menezes (telmo@telmomenezes.com)
+ * @author Ofir Pele
+ *
+ */
 public class JFastEMD {
     /**
      * This interface is similar to Rubner's interface. See:
@@ -84,7 +88,7 @@ public class JFastEMD {
     
 
     static private long emdHatImplLongLongInt(Vector<Long> Pc, Vector<Long> Qc,
-            Vector<Vector<Long>> C, long extra_mass_penalty) {
+            Vector<Vector<Long>> C, long extraMassPenalty) {
 
         int N = Pc.size();
         assert (Qc.size() == N);
@@ -143,8 +147,8 @@ public class JFastEMD {
                     maxC = C.get(i).get(j);
             }
         }
-        if (extra_mass_penalty == -1)
-            extra_mass_penalty = maxC;
+        if (extraMassPenalty == -1)
+            extraMassPenalty = maxC;
 
         Set<Integer> sourcesThatFlowNotOnlyToThresh = new HashSet<Integer>();
         Set<Integer> sinksThatGetFlowNotOnlyFromThresh = new HashSet<Integer>();
@@ -189,15 +193,11 @@ public class JFastEMD {
         // add edges from/to threshold node,
         // note that costs are reversed to the paper (see also remark* above)
         // It is important that it will be this way because of remark* above.
-        {
-            for (int i = 0; i < N; ++i) {
-                c.get(i).add(new Edge(THRESHOLD_NODE, 0));
-            }
+        for (int i = 0; i < N; ++i) {
+            c.get(i).add(new Edge(THRESHOLD_NODE, 0));
         }
-        {
-            for (int j = 0; j < N; ++j) {
-                c.get(THRESHOLD_NODE).add(new Edge(j + N, maxC));
-            }
+        for (int j = 0; j < N; ++j) {
+            c.get(THRESHOLD_NODE).add(new Edge(j + N, maxC));
         }
 
         // artificial arcs - Note the restriction that only one edge i,j is
@@ -220,7 +220,6 @@ public class JFastEMD {
             nodesNewNames.add(REMOVE_NODE_FLAG);
             nodesOldNames.add(0);
         }
-        // nodes_old_names.reserve(b.size());
         for (int i = 0; i < N * 2; i++) {
             if (b.get(i) != 0) {
                 if (sourcesThatFlowNotOnlyToThresh.contains(i)
@@ -232,11 +231,7 @@ public class JFastEMD {
                     if (i >= N) {
                         preFlowCost -= (b.get(i) * maxC);
                     }
-                    b.set(THRESHOLD_NODE, b.get(THRESHOLD_NODE) + b.get(i)); // add
-                                                                             // mass(i<N)
-                                                                             // or
-                                                                             // deficit
-                                                                             // (i>=N)
+                    b.set(THRESHOLD_NODE, b.get(THRESHOLD_NODE) + b.get(i)); // add mass(i<N) or deficit (i>=N)
                 }
             }
         }
@@ -287,14 +282,13 @@ public class JFastEMD {
 
         myDist = preFlowCost + // pre-flowing on cases where it was possible
                 mcfDist + // solution of the transportation problem
-                (absDiffSumPSumQ * extra_mass_penalty); // emd-hat extra mass
-                                                        // penalty
+                (absDiffSumPSumQ * extraMassPenalty); // emd-hat extra mass penalty
 
         return myDist;
     }
 
     static private double emdHat(Vector<Double> P, Vector<Double> Q, Vector<Vector<Double>> C,
-            double extra_mass_penalty) {
+            double extraMassPenalty) {
 
         // This condition should hold:
         // ( 2^(sizeof(CONVERT_TO_T*8)) >= ( MULT_FACTOR^2 )
@@ -352,9 +346,9 @@ public class JFastEMD {
         dist = dist / CnormFactor;
 
         // adding extra mass penalty
-        if (extra_mass_penalty == -1)
-            extra_mass_penalty = maxC;
-        dist += (maxSum - minSum) * extra_mass_penalty;
+        if (extraMassPenalty == -1)
+            extraMassPenalty = maxC;
+        dist += (maxSum - minSum) * extraMassPenalty;
         
         return dist;
     }

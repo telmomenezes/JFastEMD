@@ -5,7 +5,10 @@ import java.util.List;
 import java.util.Vector;
 
 
-
+/**
+ * @author Telmo Menezes (telmo@telmomenezes.com)
+ *
+ */
 class Edge {
     Edge(int to, long cost) {
         _to = to;

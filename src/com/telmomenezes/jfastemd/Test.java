@@ -1,5 +1,9 @@
 package com.telmomenezes.jfastemd;
 
+/**
+ * @author Telmo Menezes (telmo@telmomenezes.com)
+ *
+ */
 public class Test {
     static double[] a0 = {1.0, 0.0, 0.0, 0.0};
     static double[] a1 = {0.0, 1.0, 0.0, 0.0};

@@ -1,6 +1,10 @@
 package com.telmomenezes.jfastemd;
 
 
+/**
+ * @author Telmo Menezes (telmo@telmomenezes.com)
+ *
+ */
 public class Signature {
     private int numberOfFeatures;
     private Feature[] features;
