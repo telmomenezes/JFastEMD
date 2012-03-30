@@ -53,8 +53,7 @@ public class Test {
         Signature sig1 = getSignature(map1);
         Signature sig2 = getSignature(map2);
 
-        JFastEMD fastemd = new JFastEMD();
-        double dist = fastemd.distance(sig1, sig2, -1);
+        double dist = JFastEMD.distance(sig1, sig2, -1);
 
         return dist;
     }
