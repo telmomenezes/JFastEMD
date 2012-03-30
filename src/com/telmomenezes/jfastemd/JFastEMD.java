@@ -355,7 +355,7 @@ public class JFastEMD {
         if (extra_mass_penalty == -1)
             extra_mass_penalty = maxC;
         dist += (maxSum - minSum) * extra_mass_penalty;
-
+        
         return dist;
     }
 }
