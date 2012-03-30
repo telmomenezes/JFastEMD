@@ -5,6 +5,27 @@ This is a pure Java implementation of the Fast Earth Mover's Algorithm by Ofir P
 
 http://www.cs.huji.ac.il/~ofirpele/FastEMD/code/
 
+Please cite these papers if you use this code:
+    A Linear Time Histogram Metric for Improved SIFT Matching
+    Ofir Pele, Michael Werman
+    ECCV 2008
+    bibTex:
+    @INPROCEEDINGS{Pele-eccv2008,
+    author = {Ofir Pele and Michael Werman},
+    title = {A Linear Time Histogram Metric for Improved SIFT Matching},
+    booktitle = {ECCV},
+    year = {2008}
+    }
+    Fast and Robust Earth Mover's Distances
+    Ofir Pele, Michael Werman
+    ICCV 2009
+    @INPROCEEDINGS{Pele-iccv2009,
+    author = {Ofir Pele and Michael Werman},
+    title = {Fast and Robust Earth Mover's Distances},
+    booktitle = {ICCV},
+    year = {2009}
+    }
+
 Install
 -------
 
